@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <jsp-config>
+        <jsp-property-group> <!--创建⼀个JSP属性组-->
+            <url-pattern>*.jsp</url-pattern> <!--所有jsp⽂件使⽤该属性-->
+            <url-pattern>*.jspf</url-pattern> <!--所有的jspf使⽤该属性-->
+            <page-encoding>UTF-8</page-encoding>
+            <scripting-invalid>false</scripting-invalid> <!--是否禁⽌在JSP中使⽤Java, -->
+            <include-prelude>/WEB-INF/jsp/base.jspf</include-prelude> <!--jsp头部需要包含的⽂件-->
+            <trim-directive-whitespaces>true</trim-directive-whitespaces><!--删除响应中的空⽩⾏-->
+            <default-content-type>text/html</default-content-type>
+        </jsp-property-group>
+    </jsp-config>
+</web-app>
