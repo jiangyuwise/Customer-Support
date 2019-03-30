@@ -28,8 +28,7 @@
                 Ticket #<%= idString %>: <a href="<c:url value="/tickets">
                     <c:param name="action" value="view" />
                     <c:param name="ticketId" value="<%= idString %>" />
-                    </c:url><%= ticket.getSubject() %> </a>
-                    (Customer: <%= ticket.getCustomerName() %>)<br/>
+                    </c:url>"> <%= ticket.getSubject() %> </a> (Customer: <%= ticket.getCustomerName() %>)<br/>
     <%
             }
         }
