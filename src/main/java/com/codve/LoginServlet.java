@@ -29,7 +29,13 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("username") != null) {
+
+        // 添加注销功能
+        if (request.getParameter("logout") != null) {
+            session.invalidate();
+            response.sendRedirect("login");
+            return;
+        } else if (session.getAttribute("username") != null) {
             response.sendRedirect("tickets");
             return;
         }
