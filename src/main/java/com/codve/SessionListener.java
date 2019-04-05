@@ -18,6 +18,7 @@ public class SessionListener implements HttpSessionListener,
         // 会话创建时调用
         String msg = this.date() + ": Session " + e.getSession().getId() + " created.";
         System.out.println(msg);
+        SessionRegistry.addSession(e.getSession());
     }
 
     @Override
@@ -25,6 +26,7 @@ public class SessionListener implements HttpSessionListener,
         // 会话删除时调用
         String msg = this.date() + ": Session " + e.getSession().getId() + " destroyed.";
         System.out.println(msg);
+        SessionRegistry.removeSession(e.getSession());
     }
 
     @Override
@@ -32,6 +34,7 @@ public class SessionListener implements HttpSessionListener,
         String msg = this.date() + ": Session ID " + oldSessionId + " changed to " +
                 e.getSession().getId();
         System.out.println(msg);
+        SessionRegistry.updateSessionId(e.getSession(), oldSessionId);
     }
 
     private String date() {
