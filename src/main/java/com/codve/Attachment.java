@@ -1,6 +1,5 @@
 package com.codve;
 
-
 import lombok.Data;
 
 @Data
