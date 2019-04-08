@@ -1,3 +1,4 @@
+<%--@elvariable id="sessionNumber" type="java.lang.Integer"--%>
 <%@ page import="java.util.List" %>
 <%
     int sessionNumber = (Integer) request.getAttribute("sessionNumber");
@@ -13,7 +14,7 @@
 <body>
     <a href="<c:url value="/login?logout" />">Logout</a>
     <h2>Sessions</h2>
-    There are <%= sessionNumber %> sessions.<br/><br/>
+    There are ${sessionNumber} sessions.<br/><br/>
     <%
         long timestamp = System.currentTimeMillis();
         for (HttpSession tmpSession : sessions) {

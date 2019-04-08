@@ -61,6 +61,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 

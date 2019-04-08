@@ -1,7 +1,6 @@
-<%@ page import="com.codve.Ticket" %>
-<%@ page session="false" %>
+<%--@elvariable id="ticketId" type="java.lang.String"--%>
+<%--@elvariable id="ticket" type="com.codve.Ticket"--%>
 <%
-    String ticketId = (String) request.getAttribute("ticketId");
     Ticket ticket = (Ticket) request.getAttribute("ticket");
 %>
 
@@ -12,9 +11,9 @@
 </head>
 <body>
     <a href="<c:url value="/login?logout" />">Logout</a>
-    <h2>Ticket #<%= ticketId %>: <%= ticket.getSubject()%> </h2>
-    <b>Customer Name - <%= ticket.getCustomerName() %></b><br/><br/>
-    <%= ticket.getBody()%><br/><br/>
+    <h2>Ticket #${ticketId} : ${ticket.subject} </h2>
+    <b>Customer Name - ${ticket.customerName}</b><br/><br/>
+    ${ticket.body} <br/><br/>
     <%
         if (ticket.getNumberOfAttachments() > 0) {
     %>Attachments:
@@ -27,7 +26,7 @@
     %>
                 <a href="<c:url value="/tickets">
                     <c:param name="action" value="download" />
-                    <c:param name="ticketId" value="<%= ticketId %>" />
+                    <c:param name="ticketId" value="${ticketId}" />
                     <c:param name="attachment" value="<%= attachment.getName() %>" />
                     </c:url>"><%= attachment.getName() %></a>
     <%
