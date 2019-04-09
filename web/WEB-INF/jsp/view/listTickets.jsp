@@ -1,11 +1,4 @@
 <%--@elvariable id="ticketDatabase" type="java.util.Map<Integer, com.codve.Ticket>"--%>
-<%@ page session="false" %>
-<%@ page import="java.util.Map" %>
-<%
-    @SuppressWarnings("unchecked")
-    Map<Integer, Ticket> ticketDatabase =
-            (Map<Integer, Ticket>) request.getAttribute("ticketDatabase");
-%>
 <!doctype html>
 <html lang="en">
 <head>
