@@ -1,6 +1,6 @@
+<%--@elvariable id="ticketDatabase" type="java.util.Map<Integer, com.codve.Ticket>"--%>
 <%@ page session="false" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="com.codve.Ticket" %>
 <%
     @SuppressWarnings("unchecked")
     Map<Integer, Ticket> ticketDatabase =
@@ -17,22 +17,21 @@
     <a href="<c:url value="/tickets">
             <c:param name="action" value="create"/>
     </c:url>">Create Ticket</a><br/><br/>
-    <%
-        if (ticketDatabase.size() == 0) {
-    %><b>There are no tickets in the system.</b>
-    <%
-        } else {
-            for (int id : ticketDatabase.keySet()) {
-                String idString = Integer.toString(id);
-                Ticket ticket = ticketDatabase.get(id);
-    %>
-                Ticket #<%= idString %>: <a href="<c:url value="/tickets">
+
+    <c:choose>
+        <c:when test="${fn:length(ticketDatabase) == 0}">
+            <b>There are no tickets in the system.</b>
+        </c:when>
+        <c:otherwise>
+            <c:forEach items="${ticketDatabase}" var="entry">
+                Ticket ${entry.key}: <a href="<c:url value="/tickets">
                     <c:param name="action" value="view" />
-                    <c:param name="ticketId" value="<%= idString %>" />
-                    </c:url>"> <%= ticket.getSubject() %> </a> (Customer: <%= ticket.getCustomerName() %>)<br/>
-    <%
-            }
-        }
-    %>
+                    <c:param name="ticketId" value="${entry.key}" />
+                </c:url>"><c:out value="${entry.value.subject}" /></a>
+                (customer: <c:out value="${entry.value.customerName}" />)<br/>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
+
 </body>
 </html>
