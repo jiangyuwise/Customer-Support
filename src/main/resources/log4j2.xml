@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration status="WARN">
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%date{DEFAULT} %level %logger - %msg%n"/>
+        </Console>
+        <RollingFile name="codveFileAppender" fileName="../logs/Customer-Support.log"
+                     filePattern="../logs/Customer-Support-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <pattern>%date{DEFAULT} -%level %location: %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="4" />
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="warn">
+            <appender-ref ref="Console" />
+        </root>
+        <logger name="com.codve" level="info" additivity="false">
+            <appender-ref ref="codveFileAppender" />
+            <appender-ref ref="Console">
+                <MarkerFilter marker="CODVE_CONSOLE" onMatch="NEUTRAL"
+                              onMismatch="DENY" />
+            </appender-ref>
+        </logger>
+        <logger name="org.apache" level="info">
+            <appender-ref ref="codveFileAppender"/>
+        </logger>
+    </loggers>
+</configuration>

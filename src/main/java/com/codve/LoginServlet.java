@@ -1,5 +1,8 @@
 package com.codve;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,7 @@ import java.util.Map;
         urlPatterns = "/login"
 )
 public class LoginServlet extends HttpServlet {
+    private static final Logger log = LogManager.getLogger();
     private static final Map<String, String> userDatabase =
             new Hashtable<>();
     // static代码块会在类加载的时候执⾏且只会执⾏⼀次,
@@ -32,6 +36,9 @@ public class LoginServlet extends HttpServlet {
 
         // 添加注销功能
         if (request.getParameter("logout") != null) {
+            if (log.isDebugEnabled()) {
+                log.debug("User {} logged out.", session.getAttribute("username"));
+            }
             session.invalidate();
             response.sendRedirect("login");
             return;
@@ -57,10 +64,12 @@ public class LoginServlet extends HttpServlet {
         if (username == null || password == null ||
                 !LoginServlet.userDatabase.containsKey(username) ||
                 !password.equals(LoginServlet.userDatabase.get(username))) {
+            log.warn("login failed for user {}.", username);
             request.setAttribute("loginFailed", true);
             request.getRequestDispatcher("/WEB-INF/jsp/view/login.jsp")
                     .forward(request, response);
         } else {
+            log.info("user {} successfully logged in.", username);
             session.setAttribute("username", username);
             request.changeSessionId(); // 更换sessionID
             response.sendRedirect("tickets");
